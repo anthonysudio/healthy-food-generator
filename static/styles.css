@@ -1,0 +1,21 @@
+/* Custom styles for Healthy Food Generator */
+
+/* Smooth transitions for buttons */
+.btn {
+    transition: transform 0.15s ease-in-out;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+/* Custom styling for flash alert messages */
+.alert {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Ensure footer or container spacing looks clean */
+main {
+    min-height: 80vh;
+}

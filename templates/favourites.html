@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Favourites
+{% endblock %}
+
+{% block main %}
+    <h2 class="mb-4">My Favourite Meals</h2>
+
+{% if not meals %}
+        <p>You haven't saved any favourites yet!</p>
+    {% else %}
+        <div class="row">
+            {% for meal in meals %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        
+                        <!-- Show image if it exists, otherwise skip it -->
+                        {% if meal.image %}
+                            <img src="{{ url_for('static', filename=meal.image.replace('static/', '')) }}" 
+                            class="card-img-top" 
+                            alt="{{ meal.name }}"
+                            style="height: 200px; object-fit: cover;">
+                        {% endif %}
+
+                        <div class="card-body">
+                            <h5 class="card-title">{{ meal.name }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ meal.country }}</h6>
+                            <p class="card-text">{{ meal.description }}</p>
+                        </div>
+                        
+                        <div class="card-footer bg-transparent">
+                            <!-- Simple button to remove from favourites -->
+                            <form action="/remove_favourite" method="post">
+                                <input type="hidden" name="meal_id" value="{{ meal.id }}">
+                                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

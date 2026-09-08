@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% block title %} Suggest a Meal {% endblock %}
+
+{% block main %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card p-4 border rounded">
+                
+            <h2 class="fw-bold mb-2">Suggest a Healthy Meal</h2>
+            <p class="text-muted mb-4">Think we have missed something? Submit a suggestion and we will potentially add it.</p>
+
+            {% if request.args.get("success") == "true" %}
+                <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+                    <strong>Thank you!</strong> Your meal suggestion has been submitted successfully.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+
+            <form action="https://api.web3forms.com/submit" method="POST">
+                    
+                <input type="hidden" name="access_key" value="d8d970fc-7297-48a4-ba4f-39b6e321650d">
+                <input type="hidden" name="subject" value="New Meal Suggestion Submitted">
+                <input type="hidden" name="redirect" value="{{ request.url_root }}suggest?success=true">
+
+                <div class="row mb-3">
+                    <div class="col-md-7 mb-3 mb-md-0">
+                        <label for="name" class="form-label fw-bold">Meal Name</label>
+                        <input type="text" class="form-control" id="name" name="Meal Name" placeholder="e.g., Potato Salad" required>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="country" class="form-label fw-bold">Country</label>
+                        <input type="text" class="form-control" id="country" name="Country" placeholder="e.g., Italy">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label fw-bold">Description</label>
+                    <textarea class="form-control" id="description" name="Description" rows="2" placeholder="Briefly describe the dish" required></textarea>
+                </div>
+
+                <div class="mb-4">
+                     <label for="ingredients" class="form-label fw-bold">Ingredients</label>
+                    <textarea class="form-control" id="ingredients" name="Ingredients" rows="3" placeholder="List ingredients" required></textarea>
+                </div>
+
+                <h5 class="fw-bold mb-3">Nutritional Information</h5>
+
+                <div class="row mb-3">
+                    <div class="col-md-4 mb-3">
+                        <label for="calories" class="form-label fw-bold small">Calories (kcal)</label>
+                        <input type="number" class="form-control" id="calories" name="Calories (kcal)" placeholder="e.g., 420">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="sodium" class="form-label fw-bold small">Sodium (mg)</label>
+                        <input type="number" class="form-control" id="sodium" name="Sodium (mg)" placeholder="e.g., 140">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="protein" class="form-label fw-bold small">Protein (g)</label>
+                        <input type="number" class="form-control" id="protein" name="Protein (g)" placeholder="e.g., 28">
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <label for="fat" class="form-label fw-bold small">Fat (g)</label>
+                        <input type="number" class="form-control" id="fat" name="Fat (g)" placeholder="e.g., 12">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="carbs" class="form-label fw-bold small">Carbs (g)</label>
+                        <input type="number" class="form-control" id="carbs" name="Carbs (g)" placeholder="e.g., 45">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="user_email" class="form-label fw-bold">Your Email <span class="text-muted fw-normal">(Optional)</span></label>
+                    <input type="email" class="form-control" id="user_email" name="Submitter Email" placeholder="yourname@example.com">
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success fw-bold">Send Suggestion</button>
+                    <a href="/" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
